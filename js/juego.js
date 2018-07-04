@@ -1,5 +1,5 @@
 // Arreglo que contiene las intrucciones del juego 
-var instrucciones = [];
+var instrucciones = ['Utiliza las flechas para mover las piezas','Ordena las piezas hasta alcanzar la imagen objetivo'];
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
 
@@ -21,21 +21,48 @@ Cada elemento de este arreglo deberá ser mostrado en la lista con id 'lista-ins
 Para eso deberás usar la función ya implementada mostrarInstruccionEnLista().
 Podés ver su implementación en la ultima parte de este codigo. */
 function mostrarInstrucciones(instrucciones) {
-    //COMPLETAR
+  for (var index = 0; index < instrucciones.length; index++) {
+    var item = instrucciones[index];
+    mostrarInstruccionEnLista(item,'lista-instrucciones')
+  }
 }
 
 /* COMPLETAR: Crear función que agregue la última dirección al arreglo de movimientos
 y utilice actualizarUltimoMovimiento para mostrarlo en pantalla */
+function agregarMovimiento(direccion) {
+  movimientos.push(direccion);
+  actualizarUltimoMovimiento(direccion);
+}
 
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 function chequearSiGano() {
-    //COMPLETAR
+  if(grilla[0][0] === 1)
+  {
+    var valorAnterior = grilla[0][0];
+    var resultado;
+    for (var i = 0; i < grilla.length; i++) {
+      for (var j = 0; j < grilla.length; j++){
+        if(valorAnterior !== 1){
+          resultado=grilla[i][j] - valorAnterior;
+          if(resultado !== 1)
+          {
+            return false;
+          }
+        }
+        valorAnterior=grilla[i][j];
+      }
+    }
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
-    //COMPLETAR
+    alert("Ganaste!");
 }
 
 /* Función que intercambia dos posiciones en la grilla.
@@ -49,18 +76,28 @@ En vez de intercambiar esos valores vamos a terminar teniendo en ambas posicione
 Se te ocurre cómo solucionar esto con una variable temporal?
 */
 function intercambiarPosicionesGrilla(filaPos1, columnaPos1, filaPos2, columnaPos2) {
-    //COMPLETAR
+  var auxiliar = grilla[filaPos2][columnaPos2];
+  grilla[filaPos2][columnaPos2]=grilla[filaPos1][columnaPos1];
+  grilla[filaPos1][columnaPos1]=auxiliar;
 }
 
 // Actualiza la posición de la pieza vacía
 function actualizarPosicionVacia(nuevaFila, nuevaColumna) {
-    //COMPLETAR
+  filaVacia = nuevaFila;
+  columnaVacia = nuevaColumna;
 }
 
 
 // Para chequear si la posicón está dentro de la grilla.
 function posicionValida(fila, columna) {
-    //COMPLETAR
+  if ((fila >= 0 && fila <= 2 ) && (columna >= 0 && columna <= 2 ))
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
 /* Movimiento de fichas, en este caso la que se mueve es la blanca intercambiando su posición con otro elemento.
@@ -83,12 +120,14 @@ function moverEnDireccion(direccion) {
     
   // Mueve pieza hacia la derecha, reemplazandola con la blanca
   else if (direccion === codigosDireccion.DERECHA) {
-    //COMPLETAR
+    nuevaColumnaPiezaVacia = columnaVacia + 1;
+    nuevaFilaPiezaVacia = filaVacia;
   }
     
   // Mueve pieza hacia la izquierda, reemplazandola con la blanca
   else if (direccion === codigosDireccion.IZQUIERDA) {
-    // COMPLETAR
+    nuevaColumnaPiezaVacia = columnaVacia - 1;
+    nuevaFilaPiezaVacia = filaVacia;
   }
 
   /* A continuación se chequea si la nueva posición es válida, si lo es, se intercambia. 
@@ -100,7 +139,7 @@ function moverEnDireccion(direccion) {
         actualizarPosicionVacia(nuevaFilaPiezaVacia, nuevaColumnaPiezaVacia);
 
   //COMPLETAR: Agregar la dirección del movimiento al arreglo de movimientos
-
+      agregarMovimiento(direccion);
     }
 }
 
