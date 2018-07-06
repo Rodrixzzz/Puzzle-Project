@@ -37,10 +37,10 @@ function agregarMovimiento(direccion) {
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 function chequearSiGano() {
-  if(grilla[0][0] === 1)
+  if(grilla[0][0] === 1 && grilla[2][2])
   {
-    var valorAnterior = grilla[0][0];
-    var resultado;
+    var valorAnterior = 1;
+    var resultado = 0;
     for (var i = 0; i < grilla.length; i++) {
       for (var j = 0; j < grilla.length; j++){
         if(valorAnterior !== 1){

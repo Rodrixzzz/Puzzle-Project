@@ -78,3 +78,35 @@ li::before {
   width: 50%;
   height: 10%;
 }
+
+/* Seccion alerta */
+#alert-cont{
+    /* display: none; */
+  position: absolute;
+  background-color: rgba(128, 128, 128, 0.918);
+  width: 70%;
+  border: 1px solid white;
+}
+.alert-title {
+  text-align: center;
+  background-color: rgb(14, 14, 243);
+}
+
+.alert-title h1 {
+  margin: 0px;
+
+}
+
+.alert-btn {
+  text-align: center;
+  margin: 0px;
+}
+
+#btn {
+  height: 100%;
+  width: 20%;
+  font-size: 30px;
+  margin-top: 0px;
+  margin-bottom: 2%;
+  box-shadow: 1px 1px rgba(128, 128, 128, 0.918);
+}
