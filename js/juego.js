@@ -21,7 +21,8 @@ Cada elemento de este arreglo deberá ser mostrado en la lista con id 'lista-ins
 Para eso deberás usar la función ya implementada mostrarInstruccionEnLista().
 Podés ver su implementación en la ultima parte de este codigo. */
 function mostrarInstrucciones(instrucciones) {
-  for (var index = 0; index < instrucciones.length; index++) {
+  for (var index = 0; index < instrucciones.length; index++) 
+  {
     var item = instrucciones[index];
     mostrarInstruccionEnLista(item,'lista-instrucciones')
   }
@@ -37,32 +38,28 @@ function agregarMovimiento(direccion) {
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
 function chequearSiGano() {
-  if(grilla[0][0] === 1 && grilla[2][2])
+  var valorAnterior;
+  var primera = true;
+  for (var i = 0; i < grilla.length; i++)
   {
-    var valorAnterior = 1;
-    var resultado = 0;
-    for (var i = 0; i < grilla.length; i++) {
-      for (var j = 0; j < grilla.length; j++){
-        if(valorAnterior !== 1){
-          resultado=grilla[i][j] - valorAnterior;
-          if(resultado !== 1)
-          {
-            return false;
-          }
+    for (var j = 0; j < grilla.length; j++)
+    {
+      if(primera === false)
+      {
+        if((grilla[i][j] - valorAnterior) !== 1)
+        {
+          return false;
         }
-        valorAnterior=grilla[i][j];
       }
+      valorAnterior = grilla[i][j];
+      primera = false;
     }
-    return true;
   }
-  else{
-    return false;
-  }
+  return true;
 }
-
 // Implementar alguna forma de mostrar un cartel que avise que ganaste el juego
 function mostrarCartelGanador() {
-    alert("Ganaste!");
+  document.getElementById('alert-container').classList.add('active');
 }
 
 /* Función que intercambia dos posiciones en la grilla.
@@ -283,3 +280,19 @@ function iniciar() {
 
 // Ejecutamos la función iniciar
 iniciar();
+
+// Nueva funcionalidad
+// Nueva partida
+function nuevaPartida() {
+  movimientos = [];
+  document.getElementById('alert-container').classList.remove('active');
+  iniciarNuevaPartida();
+}
+
+function iniciarNuevaPartida() {
+  mezclarPiezas(30);
+  capturarTeclas();
+}
+
+// Añadir evento 
+document.getElementById('btn').addEventListener('click',nuevaPartida);
