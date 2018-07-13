@@ -41,6 +41,7 @@ li::before {
 
 .col-60 {
   background: #e84a5f;
+  position: relative;
 }
 
 #flecha {
@@ -89,10 +90,10 @@ li::before {
 /* Seccion alerta */
 .alert-cont {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 50%;
   background-color: #fff;
-  width: 70%;
+  width: 100%;
   border: 1.5px solid black;
   animation: fadein 2s;
   color: #e84a5f;
